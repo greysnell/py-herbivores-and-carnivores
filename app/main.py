@@ -14,22 +14,16 @@ class Animal:
         return self.health > 0
 
     def die(self):
-        if self in Animal.alive:
+        if self in Animal.alive and not self.is_alive():
             Animal.alive.remove(self)
 
 class Herbivore(Animal):
     def hide(self):
         self.hidden = not self.hidden
 
-
-var = 8
-def bite(other):
-    if isinstance(other, Herbivore) and not other.hidden:
-        other.health -= 50
-        if other.health <= 0:
-            other.die()
-
-
 class Carnivore(Animal):
-    pass
-
+    def bite(self, other):
+        if isinstance(other, Herbivore) and not other.hidden:
+            other.health -= 50
+            if not other.is_alive():
+                other.die()
