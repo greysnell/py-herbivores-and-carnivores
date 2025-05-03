@@ -67,10 +67,10 @@ def test_only_one_method_should_be_declared_in_each_of_children_classes(
 
 
 def test_carnivore_bite_not_hidden():
-    Animal.alive = []
+        Animal.alive = []
     lion = Carnivore("King Lion")
     rabbit = Herbivore("Susan")
-    bite(rabbit)
+    lion.bite(rabbit)
     assert rabbit.health == 50, (
         "If initial health of rabbit equals 100 and rabbit is not hidden "
         "health should equal to 50 after bite."
@@ -82,7 +82,7 @@ def test_carnivore_bite_hidden():
     lion = Carnivore("King Lion")
     rabbit = Herbivore("Susan")
     rabbit.hide()
-    bite(rabbit)
+    lion.bite(rabbit)
     assert rabbit.health == 100, (
         "Carnivore cannot bite hidden herbivore"
     )
@@ -101,11 +101,11 @@ def test_carnivore_bite_to_death():
 
 
 def test_carnivore_bite_carnivore():
+    Animal.alive = []
     lion = Carnivore("Simba")
-    pantera = Carnivore("Bagire")
-    bite(pantera)
-    assert pantera.health == 100
-
+    panther = Carnivore("Bagire")
+    lion.bite(panther)
+    assert panther.health == 100
 
 def test_herbivore_hide():
     Animal.alive = []
@@ -146,7 +146,7 @@ def test_when_health_less_than_zero():
     Animal.alive = []
     lion = Carnivore("King Lion")
     rabbit = Herbivore("Susan", 25)
-    bite(rabbit)
+    lion.bite(rabbit)
     assert len(Animal.alive) == 1, (
         "Herbivore should die if health less than zero"
     )
